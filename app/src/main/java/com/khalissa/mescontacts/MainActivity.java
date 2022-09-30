@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TEST_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
+        String message = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE);
+
+        //Capture the layout TextView and set the string as its text
+        TextView textview = findViewById(R.id.prenom);
+        textview.setText(message);
 
 
         final Button button = findViewById(R.id.valider);
@@ -59,18 +64,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 
-                Intent intent_contact = new Intent();
+                Intent intent_contact = new Intent(MainActivity.this, DisplayMessageActivity.class);
                 intent_contact.putExtra("newContact", obj.toString());
+                startActivity(intent_contact);
                 setResult(Activity.RESULT_OK, intent_contact);
                 finish();
             }
         });
     }
-    /*
-    public void sendMessage(View view) {
-        Intent intent = new Intent();
-        intent.putExtra(TEST_MESSAGE, "c'est la donnée de test");
-        setResult(Activity.RESULT_OK, intent);
-        finish();
-    }*/
 }

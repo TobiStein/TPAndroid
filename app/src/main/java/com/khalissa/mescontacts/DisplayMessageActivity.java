@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class DisplayMessageActivity extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "com.exemple.myfirstapp.MESSAGE";
 
     ActivityResultLauncher<Intent> mainActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -44,18 +45,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(DisplayMessageActivity.this,MainActivity.class);
-                intent.putExtra("firstname", "");
+                intent.putExtra(EXTRA_MESSAGE, "firstname");
                 mainActivityResultLauncher.launch(intent);
             }
         });
 
     }
-    /*
-    public void openContact(View view) {
-
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("firstname", "");
-        startActivity(intent);
-    }*/
-
 }
